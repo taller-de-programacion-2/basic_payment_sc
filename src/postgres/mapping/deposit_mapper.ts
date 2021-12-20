@@ -1,5 +1,5 @@
-import { DepositEntity } from '../entity/deposit_entity';
-import { Deposit } from '../../model/deposit';
+import { DepositEntity } from "../entity/deposit_entity";
+import { Deposit } from "../../model/deposit";
 
 export const mapToDeposit = (depositEntity: DepositEntity): Deposit => {
   return {
@@ -7,7 +7,7 @@ export const mapToDeposit = (depositEntity: DepositEntity): Deposit => {
     wallet_id: depositEntity.wallet_id,
     sender_address: depositEntity.sender_address,
     amount: depositEntity.amount,
-    date: depositEntity.date
+    date: depositEntity.date,
   };
 };
 
