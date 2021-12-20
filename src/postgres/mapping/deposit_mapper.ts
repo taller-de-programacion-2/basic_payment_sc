@@ -7,7 +7,8 @@ export const mapToDeposit = (depositEntity: DepositEntity): Deposit => {
     wallet_id: depositEntity.wallet_id,
     sender_address: depositEntity.sender_address,
     amount: depositEntity.amount,
-    date: depositEntity.date,
+    month: depositEntity.month,
+    year: depositEntity.year,
   };
 };
 

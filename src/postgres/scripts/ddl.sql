@@ -10,5 +10,6 @@ CREATE TABLE DEPOSIT (
                       WALLET_ID         VARCHAR(50)  NOT NULL UNIQUE,
                       SENDER_ADDRESS    VARCHAR(100) NOT NULL,
                       AMOUNT            INTEGER NOT NULL,
-                      DATE              VARCHAR(100) NOT NULL,
+                      MONTH             INTEGER NOT NULL,
+                      YEAR              INTEGER NOT NULL,
 );

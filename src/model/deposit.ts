@@ -1,7 +1,8 @@
 export interface Deposit {
-  id?: number;
+  id?: string;
   wallet_id: string;
   sender_address: string;
   amount: string;
-  date: string;
+  month: number;
+  year: number;
 }

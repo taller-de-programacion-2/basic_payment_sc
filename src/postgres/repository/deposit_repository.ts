@@ -9,8 +9,10 @@ export const create = async (newDeposit: Deposit): Promise<Deposit> => {
 
   try {
     const { rows } = await client.query(
-      "INSERT INTO " + tableName + " (WALLET_ID, SENDER_ADDRESS, AMOUNT, DATE) VALUES ($1, $2, $3, $4) RETURNING *",
-      [newDeposit.wallet_id, newDeposit.sender_address, newDeposit.amount, newDeposit.date],
+      "INSERT INTO " +
+        tableName +
+        " (WALLET_ID, SENDER_ADDRESS, AMOUNT, MONTH, YEAR) VALUES ($1, $2, $3, $4) RETURNING *",
+      [newDeposit.wallet_id, newDeposit.sender_address, newDeposit.amount, newDeposit.month, newDeposit.year],
     );
 
     return DepositMapper.mapToDeposit(rows[0]);
