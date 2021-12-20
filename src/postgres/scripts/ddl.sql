@@ -4,3 +4,11 @@ CREATE TABLE WALLET (
     PRIVATE_KEY    VARCHAR(100) NOT NULL,
     ADDRESS     VARCHAR(100) NOT NULL,
 );
+
+CREATE TABLE DEPOSIT (
+                      ID                SERIAL PRIMARY KEY,
+                      WALLET_ID         VARCHAR(50)  NOT NULL UNIQUE,
+                      SENDER_ADDRESS    VARCHAR(100) NOT NULL,
+                      AMOUNT            INTEGER NOT NULL,
+                      DATE              VARCHAR(100) NOT NULL,
+);

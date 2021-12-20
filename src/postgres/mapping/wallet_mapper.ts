@@ -1,4 +1,4 @@
-import { WalletEntity } from '../entity/Wallet_entity';
+import { WalletEntity } from '../entity/wallet_entity';
 import { Wallet } from '../../model/wallet';
 
 export const mapToWallet = (walletEntity: WalletEntity): Wallet => {

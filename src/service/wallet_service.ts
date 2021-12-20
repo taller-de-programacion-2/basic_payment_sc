@@ -14,7 +14,7 @@ export const findById = async (idCategory: number): Promise<Wallet[] | ApiError>
 export const create = async (newCategoryDto: Wallet): Promise<Wallet | ApiError> =>
     wrapWithUnknownError(
         () => WalletRepository.create(newCategoryDto),
-        `Unable to create category ${newCategoryDto.name} due to unknown error`,
+        `Unable to create category ${newCategoryDto} due to unknown error`,
     );
 
 const wrapWithUnknownError = (process: () => Promise<any>, message: string) =>
