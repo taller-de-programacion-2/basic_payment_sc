@@ -10,7 +10,7 @@ export const create = async (newWallet: Wallet): Promise<Wallet> => {
   try {
     const { rows } = await client.query(
       "INSERT INTO " + tableName + " (USER_ID, PRIVATE_KEY, ADDRESS) VALUES ($1, $2, $3) RETURNING *",
-      [newWallet.user_id, newWallet.privateKey, newWallet.address],
+      [newWallet.user_id, newWallet.private_key, newWallet.address],
     );
 
     return WalletMapper.mapToWallet(rows[0]);
@@ -52,23 +52,6 @@ export const findById = async (id: number): Promise<Wallet | null> => {
     client.release();
   }
 };
-
-/*export const update = async (updatedWallet: Wallet): Promise<Wallet | null> => {
-    const client = await connectionPool.connect();
-
-    try {
-        const { rows } = await client.query('UPDATE ' + tableName + ' SET NAME = $1 WHERE ID = $2 RETURNING *', [
-            updatedWallet.name,
-            updatedWallet.id,
-        ]);
-
-        return WalletMapper.mapToWallet(rows[0]);
-    } catch (exception) {
-        throw exception;
-    } finally {
-        client.release();
-    }
-};*/
 
 export const remove = async (id: number): Promise<void> => {
   const client = await connectionPool.connect();

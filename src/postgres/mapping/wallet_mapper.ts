@@ -5,7 +5,7 @@ export const mapToWallet = (walletEntity: WalletEntity): Wallet => {
   return {
     id: walletEntity.id,
     user_id: walletEntity.user_id,
-    privateKey: walletEntity.privateKey,
+    private_key: walletEntity.private_key,
     address: walletEntity.address,
   };
 };

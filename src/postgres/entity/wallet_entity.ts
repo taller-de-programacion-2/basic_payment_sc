@@ -1,6 +1,6 @@
 export interface WalletEntity {
   id?: number;
   user_id: string;
-  privateKey: string;
+  private_key: string;
   address: string;
 }
