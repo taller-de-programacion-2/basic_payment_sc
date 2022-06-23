@@ -8,6 +8,8 @@
     "hardhat": "2.0.6",
     "hardhat-deploy": "0.7.4",
     "hardhat-deploy-ethers": "0.3.0-beta.7",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.4.0",
     "solc": "0.7.4"
   },
   "devDependencies": {
@@ -76,7 +78,7 @@
     "clean": "hardhat clean",
     "compile": "hardhat compile",
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js --temp artifacts --testfiles \"./test/**/*.ts\"",
-    "lint": "npm run lint:sol && npm run lint:ts && npm run prettier:list-different",
+    "lint": "npm run lint:sol && npm run lint:ts && npm run prettier",
     "lint:sol": "solhint --config .solhint.json --max-warnings 0 \"contracts/**/*.sol\"",
     "lint:ts": "eslint --config ./.eslintrc.yaml --ignore-path ./.eslintignore --ext .js,.ts .",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,json,md,sol,ts}\"",
