@@ -1,28 +1,24 @@
 const ethers = require("ethers");
-const getDepositHandler = require("../handlers/getDepositHandler");
+const paymentRepository = require("../repository/paymentRepository.js");
+
+const TRANSACTION_SUCCESS = 1;
 
 const getContract = (config, wallet) => {
   return new ethers.Contract(config.contractAddress, config.contractAbi, wallet);
 };
 
-const deposits = {};
-
-const deposit = ({ config }) => async (senderWallet, amountToSend) => {
+const deposit = ({ config }) => async (senderWallet, amountToSend, uid) => {
+  //Not best practice, but for now it works
   const basicPayments = await getContract(config, senderWallet);
   const tx = await basicPayments.deposit({
     value: await ethers.utils.parseEther(amountToSend).toHexString(),
   });
-  tx.wait(1).then(
-    receipt => {
+  await tx.wait(TRANSACTION_SUCCESS).then(
+    receipt => async () => {
       console.log("Transaction mined");
       const firstEvent = receipt && receipt.events && receipt.events[0];
       console.log(firstEvent);
-      if (firstEvent && firstEvent.event == "DepositMade") {
-        deposits[tx.hash] = {
-          senderAddress: firstEvent.args.sender,
-          amountSent: firstEvent.args.amount,
-        };
-      } else {
+      if (!(firstEvent && firstEvent.event == "DepositMade")) {
         console.error(`Payment not created in tx ${tx.hash}`);
       }
     },
@@ -36,11 +32,12 @@ const deposit = ({ config }) => async (senderWallet, amountToSend) => {
       console.error(message);
     },
   );
+  await paymentRepository.save(tx.hash, uid, Date.now());
   return tx;
 };
 
 const getDepositReceipt = ({}) => async depositTxHash => {
-  return deposits[depositTxHash];
+  return paymentRepository.get(depositTxHash);
 };
 
 module.exports = dependencies => ({
