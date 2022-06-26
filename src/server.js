@@ -12,7 +12,7 @@ routes.forEach(route => fastify.route(route({ config, services })));
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen(5000);
+    await fastify.listen(5002);
     fastify.log.info(`server listening on ${fastify.server.address().port}`);
     await database.connection();
   } catch (err) {
