@@ -9,10 +9,12 @@ const fastify = require("fastify")({ logger: true });
 // Declares routes
 routes.forEach(route => fastify.route(route({ config, services })));
 
+const port = process.env.PORT || 5002;
+
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen(5000);
+    await fastify.listen(port,"0.0.0.0");
     fastify.log.info(`server listening on ${fastify.server.address().port}`);
     await database.connection();
   } catch (err) {
