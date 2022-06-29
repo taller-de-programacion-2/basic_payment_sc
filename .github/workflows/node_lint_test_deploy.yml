@@ -55,8 +55,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Generate docs
-        run: npm run swagger-autogen
+      # - name: Generate docs
+      #   run: npm run swagger-autogen
 
       - name: Build, Push and Release a Docker image to Heroku. # Your custom step name
         uses: gonuit/heroku-docker-deploy@v1.3.3 
