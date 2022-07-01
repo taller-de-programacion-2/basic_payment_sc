@@ -27,11 +27,11 @@ const deposit = ({ config }) => async (senderWallet, amountToSend, uid) => {
         const message = error instanceof Object && "message" in error ? error.message : JSON.stringify(error);
         console.error("reasons List");
         console.error(reasonsList);
-        
+
         console.error("message");
         console.error(message);
       },
-    )
+    );
     await paymentService.save(tx.hash, uid, Date.now());
     return tx;
   } catch (e) {
