@@ -6,6 +6,12 @@ function schema() {
         uid: {
           type: "string",
         },
+        current_user: {
+          type: "string",
+        },
+        admin: {
+          type: "boolean"
+        }
       },
     },
     required: ["uid"],
@@ -14,7 +20,7 @@ function schema() {
 
 function handler({ walletService }) {
   return async function (req, reply) {
-    const body = await walletService.getWalletBalance(req.url.split("=")[1]);
+    const body = await walletService.getWalletBalance(req.query.uid);
     response = {
       status: "success",
       ether: body / Math.pow(10, 18) + " ETH",
