@@ -25,17 +25,13 @@ const deposit = ({ config }) => async (senderWallet, amountToSend, uid) => {
       error => {
         const reasonsList = error.results && Object.values(error.results).map(o => o.reason);
         const message = error instanceof Object && "message" in error ? error.message : JSON.stringify(error);
-        console.error("reasons List");
-        console.error(reasonsList);
-
-        console.error("message");
-        console.error(message);
+        return {"error": message, "reasonsList": reasonsList};
       },
     );
     await paymentService.save(tx.hash, uid, Date.now());
     return tx;
   } catch (e) {
-    console.log("insufficient funds");
+    return {"error": "insufficient funds"};
   }
 };
 
