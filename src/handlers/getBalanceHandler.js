@@ -10,8 +10,8 @@ function schema() {
           type: "string",
         },
         admin: {
-          type: "boolean"
-        }
+          type: "boolean",
+        },
       },
     },
     required: ["uid"],
