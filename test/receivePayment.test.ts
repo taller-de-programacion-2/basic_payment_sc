@@ -30,7 +30,7 @@ const makeTestsPaymentToContract = (paymentFunction: PaymentFunction, functionNa
         basicPayments = await loadFixture(fixtureDeployedBasicPayments);
       });
       const testPaymentReceiving = (amountToBeSentInEthers: string) => {
-        describe(`WHEN a user sends a payment of 3 ethers`, function () {
+        describe(`WHEN a user sends a payment of ${amountToBeSentInEthers} ethers`, function () {
           let paymentTx: ContractTransaction;
           let sender: SignerWithAddress;
           let amountToBeSentPreviously: BigNumber;
