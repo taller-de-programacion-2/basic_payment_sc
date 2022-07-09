@@ -34,7 +34,7 @@ const makeTestsPaymentToContract = (paymentFunction: PaymentFunction, functionNa
           let paymentTx: ContractTransaction;
           let sender: SignerWithAddress;
           let amountToBeSentPreviously: BigNumber;
-          let contractBalance: BigNumber; 
+          let contractBalance: BigNumber;
           const amountToBeSent = ethers.utils.parseEther(amountToBeSentInEthers);
           before(async function () {
             const { sender: senderAddress } = await getNamedAccounts();
@@ -59,11 +59,10 @@ const makeTestsPaymentToContract = (paymentFunction: PaymentFunction, functionNa
               amountToBeSentPreviously.add(amountToBeSent),
             );
           });
-          it(`THEN the contract marks balance increase`), async function () {
-            return expect(await basicPayments.getContractBalance()).to.be.eq(
-              contractBalance.add(amountToBeSent),
-            );
-          }
+          it(`THEN the contract marks balance increase`),
+            async function () {
+              return expect(await basicPayments.getContractBalance()).to.be.eq(contractBalance.add(amountToBeSent));
+            };
         });
       };
 
