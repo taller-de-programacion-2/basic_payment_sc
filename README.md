@@ -155,7 +155,7 @@ To deploy the smart contracts just run
 
 depending on the network you want to use.
 
-Keep in mind that you have to set the INFURA_API_KEY and MNEMONIC envvars(the .env file can be used for this).
+Keep in mind that you have to set the ALCHEMY_API_KEY and MNEMONIC envvars(the .env file can be used for this).
 
 To get the deployed contract address just look in the `deployments/<network>/BasicPayments.json` file.
 
