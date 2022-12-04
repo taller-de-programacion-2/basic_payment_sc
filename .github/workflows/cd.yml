@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.18.4]
+        node-version: [18.12.0]
 
     steps:
       - uses: actions/checkout@v2
@@ -31,4 +31,4 @@ jobs:
         env:
           ALCHEMY_API_KEY: ${{secrets.ALCHEMY_API_KEY}}
           MNEMONIC: ${{secrets.MNEMONIC}}
-        run: npm run deploy-kovan
+        run: npm run deploy-goerli
