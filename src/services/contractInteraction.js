@@ -1,5 +1,7 @@
 const ethers = require("ethers");
 const getDepositHandler = require("../handlers/getDepositHandler");
+const {getDeployerWallet} = require("./wallets");
+const {walletService} = require("./services");
 
 const getContract = (config, wallet) => {
   return new ethers.Contract(config.contractAddress, config.contractAbi, wallet);
@@ -41,6 +43,22 @@ const deposit =
     return tx;
   };
 
+const payout = ({ config }) => async (receiverWallet, amountToSend, deployerWallet) => {
+  const basicPayments = getContract(config, deployerWallet);
+  let amount = ethers.utils.parseEther(amountToSend).toHexString();
+  const tx = await basicPayments.sendPayment(receiverWallet.address, amount);
+  tx.wait(1).then(receipt => {
+    console.log("Transaction mined", receiverWallet.address, "\n");
+    const firstEvent = receipt && receipt.events && receipt.events[0];
+    if (firstEvent && firstEvent.event == "PaymentMade") {
+      console.log(`Successful deposit`);
+    } else {
+      console.error(`Payment not created in tx ${tx.hash}`);
+    }
+  });
+  return tx;
+};
+
 const getDepositReceipt =
   ({}) =>
   async depositTxHash => {
@@ -50,4 +68,5 @@ const getDepositReceipt =
 module.exports = dependencies => ({
   deposit: deposit(dependencies),
   getDepositReceipt: getDepositReceipt(dependencies),
+  payout: payout(dependencies)
 });

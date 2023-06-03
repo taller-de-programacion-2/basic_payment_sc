@@ -20,3 +20,4 @@ deployments/
 *.tsbuildinfo
 coverage.json
 npm-debug.log*
+.idea/

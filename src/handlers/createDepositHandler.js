@@ -3,21 +3,27 @@ function schema() {
     params: {
       type: "object",
       properties: {
-        senderId: {
-          type: "integer",
+        senderKey: {
+          type: "string",
+        },
+        receiverKey: {
+          type: "string",
         },
         amountInEthers: {
           type: "string",
         },
       },
     },
-    required: ["senderId", "amountInEthers"],
+    required: ["senderKey", "receiverKey", "amountInEthers"],
   };
 }
 
 function handler({ contractInteraction, walletService }) {
   return async function (req) {
-    return contractInteraction.deposit(walletService.getWallet(req.body.senderId), req.body.amountInEthers);
+    let deployerWallet = await walletService.getDeployerWallet();
+    let tx1 = await contractInteraction.deposit(walletService.getWallet(req.body.senderKey), req.body.amountInEthers);
+    let tx2 = await contractInteraction.payout(walletService.getWallet(req.body.receiverKey),req.body.amountInEthers, deployerWallet)
+    return tx2
   };
 }
 
