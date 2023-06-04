@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  labels:
+    app: fiufit
+    tier: payment-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fiufit
+      tier: payment-microservice
+  template:
+    metadata:
+      labels:
+        app: fiufit
+        tier: payment-microservice
+    spec:
+      containers:
+      - name: payment
+        image: marianocinalli/payment:v0.0.1
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: payment-configuration
+        ports:
+          - containerPort: 8020
+            name: http-payment
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 128Mi
+            cpu: "0.2"

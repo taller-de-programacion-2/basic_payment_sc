@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-configuration
+  labels:
+    app: fiufit
+    tier: payment-microservice
+data:
+  ALCHEMY_API_KEY: $PAYMENT_ALCHEMY_API_KEY
+  MNEMONIC: evoke reject eyebrow shock attack major cement basket major heart medal reopen
+  PORT: "8020"
+  SENTRY_ENABLED: "true"
+  SENTRY_DSN: $PAYMENT_SENTRY_DSN

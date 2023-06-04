@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service
+  labels:
+    app: fiufit
+    tier: payment-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: payment-svc
+    protocol: TCP
+    port: 8020
+    targetPort: http-payment
+  selector:
+    app: fiufit
+    tier: payment-microservice
